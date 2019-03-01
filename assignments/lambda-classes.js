@@ -15,6 +15,21 @@ class Instructor extends Person {
         this.specialty = ininfo.specialty;
         this.catchPhrase = ininfo.catchPhrase;
     }
+    //determine grade
+    //random 1 and 0
+    // if 1 add grade
+    //if 0 subtract
+    grading(student) {
+        let n = Math.round(Math.random());
+        console.log(student.grade);
+        if (n === 1) {
+            student.grade = student.grade+3;
+            return `${student.name} gained 3 points`;
+        } else{
+            student.grade = student.grade-3;
+            return `${student.name} lost 3 points`;
+        }
+    }
     demo(subject) {
         return `Today we are learning about ${subject}`;
     }
@@ -25,6 +40,7 @@ class Instructor extends Person {
 class Student extends Person {
     constructor(stinfo) {
         super(stinfo);
+        this.grade = stinfo.grade;
         this.previousBackground = stinfo.previousBackground;
         this.className = stinfo.className;
         this.favSubjects = stinfo.favSubjects;
@@ -40,6 +56,13 @@ class Student extends Person {
     sprintChallenge(subject) {
         return `${this.name} has begun sprint challenge on ${subject}`
     }
+    graduate() {
+        if(this.grade >= 70) {
+            return `${this.name} has graduated with a ${this.grade}%!`
+        } else {
+            return `${this.name} did not graduate yet.`;
+        }
+    } 
 }
 class PM extends Person {
     constructor(pminfo) {
@@ -80,7 +103,8 @@ const sam = new Student({
     gender: 'male',
     previousBackground: 'Home Inspections',
     className: 'Web18',
-    favSubjects: ['HTML']
+    favSubjects: ['HTML'],
+    grade: 85
 });
 const ique = new Student({
     name: 'ique',
@@ -89,7 +113,8 @@ const ique = new Student({
     gender: 'male',
     previousBackground: 'PharmTech',
     className: 'medschool',
-    favSubjects: ['Drugs and behavior', 'biology']
+    favSubjects: ['Drugs and behavior', 'biology'],
+    grade:60
 });
 const liz = new PM({
     name: 'liz',
@@ -115,3 +140,7 @@ console.log(ique.listSubjects(ique.favSubjects));
 console.log(josh.grade(sam, 'HTML'));
 console.log(sam.sprintChallenge('Coding'));
 console.log(billee.standUp('web18'));
+console.log(josh.grading(sam));
+console.log(sam.grade);
+console.log(sam.graduate());
+console.log(ique.graduate());
